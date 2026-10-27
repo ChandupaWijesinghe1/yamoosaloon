@@ -1,0 +1,41 @@
+/* Saved salons */
+
+.saved-screen {
+  max-width: 40rem;
+}
+
+.saved-head {
+  margin-bottom: var(--space-6);
+}
+
+.saved-list {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.saved-card .explore-card-link {
+  grid-template-columns: minmax(96px, 38%) minmax(0, 1fr);
+}
+
+.saved-card h2 {
+  margin: 0;
+  padding-inline-end: 0;
+  font-size: var(--fs-md);
+}
+
+.saved-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: 0 var(--space-4) var(--space-4);
+}
+
+.saved-actions .btn {
+  min-height: var(--tap-min);
+}
+
+.saved-empty {
+  display: grid;
+  gap: var(--space-5);
+  justify-items: start;
+}

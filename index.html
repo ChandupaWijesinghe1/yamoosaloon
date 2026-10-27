@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" data-locale="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#0C241E">
+    <meta name="referrer" content="no-referrer">
+    <meta name="robots" content="noindex, nofollow">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    >
+    <title data-i18n="meta.title"></title>
+    <meta name="description" content="" data-i18n-attr="content:meta.description">
+    <meta name="yamoo-api-base" content="">
+    <meta name="yamoo-timeout" content="12000">
+    <meta name="yamoo-debounce" content="280">
+    <link rel="icon" href="/public/assets/logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/src/styles/main.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#app" data-i18n="a11y.skip"></a>
+    <header class="site-header">
+      <a class="brand" href="/" data-link data-i18n-aria="brand.name">
+        <span class="brand-mark" aria-hidden="true">
+          <img src="/public/assets/logo.svg" alt="" width="32" height="32">
+        </span>
+        <span data-i18n="brand.name"></span>
+      </a>
+      <nav id="site-nav" class="site-nav" data-i18n-aria="nav.primary">
+        <ul class="nav-list">
+          <li><a class="nav-link" data-link data-nav href="/" data-i18n="nav.home"></a></li>
+          <li><a class="nav-link" data-link data-nav href="/explore" data-i18n="nav.explore"></a></li>
+          <li><a class="nav-link" data-link data-nav href="/saved" data-i18n="nav.saved"></a></li>
+          <li><a class="nav-link" data-link data-nav href="/bookings" data-i18n="nav.bookings"></a></li>
+          <li><a class="nav-link" data-link data-nav href="/account" data-i18n="nav.account"></a></li>
+          <li><a class="nav-link" data-link data-nav href="/privacy" data-i18n="nav.privacy"></a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="notice-wrap">
+          <button
+            id="notice-bell"
+            class="icon-button notice-bell"
+            type="button"
+            aria-expanded="false"
+            aria-controls="notice-panel"
+            data-i18n-aria="notices.bell"
+          >
+            <img src="/public/assets/icons/bell.svg" alt="" width="22" height="22">
+            <span id="notice-badge" class="notice-badge" hidden></span>
+          </button>
+          <div id="notice-panel" class="notice-panel" hidden role="dialog" aria-labelledby="notice-panel-title"></div>
+        </div>
+        <label class="visually-hidden" for="lang-switch" data-i18n="lang.switch"></label>
+        <select id="lang-switch" class="lang-switch" data-i18n-aria="lang.switch">
+          <option value="en" data-i18n="lang.en"></option>
+          <option value="si" data-i18n="lang.si"></option>
+          <option value="singlish" data-i18n="lang.singlish"></option>
+        </select>
+        <button
+          id="nav-toggle"
+          class="icon-button nav-toggle"
+          type="button"
+          aria-controls="site-nav"
+          aria-expanded="false"
+          data-i18n-aria="nav.open"
+        >
+          <img src="/public/assets/icons/menu.svg" alt="" width="24" height="24">
+        </button>
+      </div>
+    </header>
+    <p id="offline-banner" class="offline-banner" hidden role="status" data-i18n="offline.banner"></p>
+    <main id="app" tabindex="-1"></main>
+    <footer class="site-footer">
+      <p class="i18n-text" data-i18n="footer.copy"></p>
+    </footer>
+    <script type="module" src="/src/scripts/app.js"></script>
+  </body>
+</html>

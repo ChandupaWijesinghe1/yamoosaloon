@@ -1,0 +1,194 @@
+/* My Bookings — upcoming / past tracker */
+
+.appt-screen {
+  max-width: 40rem;
+}
+
+.appt-head h1 {
+  margin-bottom: var(--space-2);
+}
+
+.appt-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  margin: var(--space-6) 0 var(--space-5);
+  padding: var(--space-1);
+  background: var(--bg-sunken);
+  border-radius: var(--radius-pill);
+}
+
+.appt-tab {
+  min-height: var(--tap-min);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--fg-muted);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.appt-tab[aria-selected="true"] {
+  background: var(--bg-elevated);
+  color: var(--color-forest-950);
+  box-shadow: var(--shadow-sm);
+}
+
+.appt-list {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.appt-card {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.appt-card.is-proposal {
+  border-color: var(--color-honey-500);
+  background: var(--accent-soft);
+  box-shadow: var(--shadow-md);
+}
+
+.appt-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.appt-card h2 {
+  margin: 0;
+  font-size: var(--fs-lg);
+}
+
+.appt-kind,
+.appt-meta,
+.appt-services,
+.appt-when,
+.appt-reviewed,
+.appt-proposal-note,
+.appt-card time {
+  margin: 0;
+  color: var(--fg-muted);
+}
+
+.appt-kind {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.appt-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  max-width: 100%;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.appt-badge.is-confirmed {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.appt-badge.is-pending,
+.appt-badge.is-proposed {
+  background: #f6e2b0;
+  color: var(--color-honey-700);
+}
+
+.appt-badge.is-completed {
+  background: var(--bg-sunken);
+  color: var(--fg-muted);
+}
+
+.appt-badge.is-cancelled {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.appt-proposal {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--bg-elevated);
+  border: 1px dashed var(--color-honey-600);
+  border-radius: var(--radius-md);
+}
+
+.appt-proposal-label,
+.appt-proposal-time {
+  margin: 0;
+  font-weight: 700;
+  color: var(--color-forest-950);
+}
+
+.appt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.appt-actions .btn {
+  min-height: var(--tap-min);
+}
+
+.appt-actions .btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.appt-empty {
+  display: grid;
+  gap: var(--space-5);
+  justify-items: start;
+}
+
+.appt-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: end center;
+  background: rgb(12 36 30 / 0.55);
+}
+
+.appt-sheet-panel {
+  width: min(32rem, 100%);
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.appt-stars {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.appt-star {
+  min-width: var(--tap-min);
+  min-height: var(--tap-min);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--border-strong);
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.appt-star.is-on {
+  color: var(--color-honey-500);
+}

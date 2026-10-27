@@ -1,0 +1,16 @@
+Locally hosted OFL fonts (no CDN at runtime)
+
+DM Sans
+Copyright 2014 The DM Sans Project Authors
+https://github.com/googlefonts/dm-fonts
+SIL Open Font License 1.1 — see OFL-DMSans.txt
+
+Manrope
+Copyright 2018 The Manrope Project Authors
+https://github.com/sharanda/manrope
+SIL Open Font License 1.1 — see OFL-Manrope.txt
+
+Noto Sans Sinhala
+Copyright 2022 The Noto Project Authors
+https://github.com/notofonts/sinhala
+SIL Open Font License 1.1 — see OFL-NotoSansSinhala.txt

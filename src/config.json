@@ -1,0 +1,5 @@
+{
+  "apiBase": "",
+  "timeoutMs": 12000,
+  "debounceMs": 280
+}

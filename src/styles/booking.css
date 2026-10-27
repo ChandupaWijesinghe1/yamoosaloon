@@ -1,0 +1,241 @@
+/* Booking checkout — staff, Colombo slots, summary */
+
+.book-screen {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-5) var(--space-12);
+}
+
+.book-progress {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: 0 0 var(--space-6);
+  padding: 0;
+  list-style: none;
+}
+
+.book-progress-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap-min);
+  color: var(--fg-muted);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+}
+
+.book-progress-item.is-current,
+.book-progress-item.is-done {
+  color: var(--color-forest-950);
+}
+
+.book-progress-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--bg-sunken);
+  color: inherit;
+}
+
+.book-progress-item.is-current .book-progress-index,
+.book-progress-item.is-done .book-progress-index {
+  background: var(--color-forest-900);
+  color: var(--fg-inverse);
+}
+
+.book-panel {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.book-head h1 {
+  margin: var(--space-3) 0 var(--space-2);
+}
+
+.book-zone,
+.book-legend {
+  margin: 0;
+  color: var(--fg-muted);
+  font-weight: 600;
+}
+
+.book-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+}
+
+.book-staff-list {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.book-staff-card {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+  min-height: 4.5rem;
+  padding: var(--space-3);
+  text-align: start;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.book-staff-card img {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--color-forest-900);
+}
+
+.book-staff-copy {
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.book-staff-copy strong {
+  font-family: var(--font-display);
+}
+
+.book-staff-copy span {
+  color: var(--fg-muted);
+}
+
+.book-staff-card.is-any {
+  border-style: dashed;
+  border-color: var(--border-strong);
+  background: var(--accent-soft);
+}
+
+.book-staff-card.is-selected,
+.book-date.is-selected,
+.book-slot.is-selected {
+  border-color: var(--color-forest-900);
+  box-shadow: var(--focus-ring);
+}
+
+.book-dates {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 12;
+  display: flex;
+  gap: var(--space-2);
+  margin: 0 calc(-1 * var(--space-5));
+  padding: var(--space-3) var(--space-5);
+  overflow-x: auto;
+  background: rgb(251 244 228 / 0.96);
+  border-bottom: 1px solid var(--border);
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.book-date {
+  flex: 0 0 auto;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-1);
+  min-width: 4.5rem;
+  min-height: 5.25rem;
+  padding: var(--space-2);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  scroll-snap-align: start;
+}
+
+.book-date-week,
+.book-date-month {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--fg-muted);
+}
+
+.book-date-day {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+}
+
+.book-slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  gap: var(--space-3);
+}
+
+.book-slot {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: center;
+  min-height: 4.75rem;
+  padding: var(--space-3);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--fg);
+  font-family: var(--font-sans);
+}
+
+.book-slot-time {
+  font-weight: 700;
+}
+
+.book-slot.is-taken {
+  color: var(--fg-muted);
+  background: var(--bg-sunken);
+}
+
+.book-summary {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+}
+
+.book-summary > div {
+  display: grid;
+  gap: var(--space-1);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border);
+}
+
+.book-summary dt {
+  color: var(--fg-muted);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.book-summary dd {
+  margin: 0;
+}
+
+.book-next {
+  min-height: var(--tap-min);
+  width: 100%;
+}
+
+.book-next:disabled,
+.book-slot:disabled,
+.book-date:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.book-screen .btn-ghost {
+  min-height: var(--tap-min);
+  justify-self: start;
+}

@@ -1,0 +1,133 @@
+/* Yamoo design tokens — honey, cream, dark green */
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/public/assets/fonts/DMSans-Variable.ttf") format("truetype");
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/public/assets/fonts/DMSans-Italic-Variable.ttf") format("truetype");
+  font-weight: 100 1000;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("/public/assets/fonts/Manrope-Variable.ttf") format("truetype");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Sans Sinhala";
+  src: url("/public/assets/fonts/NotoSansSinhala-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+
+  /* Brand: Honey */
+  --color-honey-50: #fff6df;
+  --color-honey-100: #ffe9b0;
+  --color-honey-400: #f0b429;
+  --color-honey-500: #d89a12;
+  --color-honey-600: #b07a0c;
+  --color-honey-700: #8a5e09;
+
+  /* Brand: Cream */
+  --color-cream-50: #fffdf8;
+  --color-cream-100: #fbf4e4;
+  --color-cream-200: #f0e4c8;
+  --color-cream-300: #e2d0a8;
+  --color-cream-400: #cbb586;
+
+  /* Brand: Dark green (forest) */
+  --color-forest-600: #2a5c4c;
+  --color-forest-700: #1e4a3c;
+  --color-forest-800: #14352c;
+  --color-forest-900: #0c241e;
+  --color-forest-950: #071612;
+
+  /* Semantic surfaces — WCAG AA+ on cream / forest pairs */
+  --bg: var(--color-cream-100);
+  --bg-elevated: var(--color-cream-50);
+  --bg-sunken: var(--color-cream-200);
+  --bg-inverse: var(--color-forest-900);
+  --fg: var(--color-forest-950);
+  --fg-muted: var(--color-forest-700);
+  --fg-inverse: var(--color-cream-50);
+  --accent: var(--color-honey-500);
+  --accent-hover: var(--color-honey-600);
+  --accent-soft: var(--color-honey-100);
+  --on-accent: var(--color-forest-950);
+  --border: var(--color-cream-300);
+  --border-strong: var(--color-forest-800);
+  --focus: var(--color-forest-800);
+  --focus-ring: 0 0 0 3px var(--color-cream-50), 0 0 0 6px var(--color-forest-800);
+  --danger: #8b1e1e;
+  --danger-soft: #f8d7d7;
+  --success: #0f5c3a;
+  --success-soft: #d4edda;
+
+  /* Typography — locally hosted only */
+  --font-sans: "DM Sans", "Noto Sans Sinhala", system-ui, sans-serif;
+  --font-display: "Manrope", "Noto Sans Sinhala", system-ui, sans-serif;
+  --font-sinhala: "Noto Sans Sinhala", "DM Sans", sans-serif;
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.9375rem;
+  --fs-md: 1.0625rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: 2.25rem;
+  --lh-tight: 1.25;
+  --lh-body: 1.6;
+  --tracking-display: -0.02em;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Accessibility: 44×44px minimum tap targets (WCAG 2.2 AAA target size) */
+  --tap-min: 44px;
+
+  /* Shape & elevation */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+  --shadow-sm: 0 1px 2px rgb(7 22 18 / 0.08);
+  --shadow-md: 0 8px 24px rgb(7 22 18 / 0.1);
+  --content-max: 72rem;
+  --header-height: 4.5rem;
+  --transition: 160ms ease;
+}
+
+html[data-locale="si"] {
+  --font-sans: "Noto Sans Sinhala", "DM Sans", system-ui, sans-serif;
+  --font-display: "Noto Sans Sinhala", "Manrope", system-ui, sans-serif;
+  --lh-body: 1.75;
+  --lh-tight: 1.45;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition: 0ms;
+  }
+}
