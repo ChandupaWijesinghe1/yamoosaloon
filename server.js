@@ -25,17 +25,85 @@ const MIME = {
 const BLOCKED = new Set([".env", ".git", "node_modules"]);
 const SPA_ROUTES = new Set(["/", "/account", "/privacy", "/agree", "/explore", "/bookings", "/saved", "/notices"]);
 
-const SECURITY_HEADERS = {
-  "Content-Security-Policy":
-    "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
-  "Cross-Origin-Opener-Policy": "same-origin",
-  "Cross-Origin-Resource-Policy": "same-origin",
-  "Referrer-Policy": "no-referrer",
-  "X-Content-Type-Options": "nosniff",
-  "X-Frame-Options": "DENY",
-  "Permissions-Policy": "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()",
-  "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
-};
+const CORS_METHODS = "GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS";
+const CORS_ALLOW_HEADERS = "Authorization, Content-Type, Accept";
+
+function configuredCorsOrigins() {
+  return String(process.env.CORS_ORIGIN || process.env.ALLOWED_ORIGINS || "")
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function extraConnectSources() {
+  const sources = new Set(["'self'"]);
+  sources.add("https://*.onrender.com");
+  for (const origin of configuredCorsOrigins()) {
+    if (origin === "*") {
+      sources.add("https:");
+      continue;
+    }
+    try {
+      const url = new URL(origin);
+      sources.add(`${url.protocol}//${url.host}`);
+    } catch {
+      /* skip invalid CORS_ORIGIN entries */
+    }
+  }
+  return [...sources].join(" ");
+}
+
+function isLocalHostname(hostname) {
+  return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "[::1]";
+}
+
+function isAllowedCorsOrigin(origin) {
+  if (!origin) return false;
+  let url;
+  try {
+    url = new URL(origin);
+  } catch {
+    return false;
+  }
+  const host = url.hostname.toLowerCase();
+  if (isLocalHostname(host)) return url.protocol === "http:" || url.protocol === "https:";
+  const allow = configuredCorsOrigins();
+  if (allow.includes("*")) return url.protocol === "https:" || !PRODUCTION;
+  if (allow.includes(origin)) return true;
+  return url.protocol === "https:" && (host === "onrender.com" || host.endsWith(".onrender.com"));
+}
+
+function corsHeadersFor(request) {
+  const origin = String(request?.headers?.origin || "");
+  if (!origin || !isAllowedCorsOrigin(origin)) return { Vary: "Origin" };
+  return {
+    "Access-Control-Allow-Origin": origin,
+    "Access-Control-Allow-Methods": CORS_METHODS,
+    "Access-Control-Allow-Headers": CORS_ALLOW_HEADERS,
+    "Access-Control-Max-Age": "600",
+    Vary: "Origin",
+  };
+}
+
+function cspPolicy() {
+  const base = `default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src ${extraConnectSources()}; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'`;
+  return PRODUCTION ? `${base}; upgrade-insecure-requests` : base;
+}
+
+function securityHeaders(request) {
+  const cors = corsHeadersFor(request);
+  return {
+    "Content-Security-Policy": cspPolicy(),
+    "Cross-Origin-Opener-Policy": "same-origin",
+    "Cross-Origin-Resource-Policy": cors["Access-Control-Allow-Origin"] ? "cross-origin" : "same-origin",
+    "Referrer-Policy": "no-referrer",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "Permissions-Policy": "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()",
+    ...(PRODUCTION ? { "Strict-Transport-Security": "max-age=31536000; includeSubDomains" } : {}),
+    ...cors,
+  };
+}
 
 function isBlocked(relativePath) {
   const parts = relativePath.split(path.sep);
@@ -43,7 +111,7 @@ function isBlocked(relativePath) {
 }
 
 function send(response, status, headers, body) {
-  response.writeHead(status, { ...SECURITY_HEADERS, ...headers });
+  response.writeHead(status, { ...securityHeaders(response.req), ...headers });
   response.end(body);
 }
 
@@ -1616,8 +1684,12 @@ app.disable("x-powered-by");
 app.set("trust proxy", 1);
 
 app.use((request, response, next) => {
-  for (const [key, value] of Object.entries(SECURITY_HEADERS)) {
+  for (const [key, value] of Object.entries(securityHeaders(request))) {
     response.setHeader(key, value);
+  }
+  if (request.method === "OPTIONS") {
+    send(response, 204, {}, "");
+    return;
   }
   next();
 });
@@ -1689,5 +1761,5 @@ app.use((_error, _request, response, _next) => {
 seedDemoBookings();
 
 app.listen(PORT, HOST, () => {
-  console.log(`Yamoo client listening on http://${HOST}:${PORT}`);
+  console.log(`Yamoo client listening on http://localhost:${PORT}`);
 });
